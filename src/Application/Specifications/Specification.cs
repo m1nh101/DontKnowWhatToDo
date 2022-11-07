@@ -24,25 +24,9 @@ public class Specification<T> : ISpecification<T>
 
   public Expression<Func<T, object>>? OrderByDescending { get; private set; }
 
-  //protected void And(Expression<Func<T, bool>> express)
-  //{
-  //  var newExpression = Expression.AndAlso(Criteria.Body, express.Body);
-  //  Criteria = Expression.Lambda<Func<T, bool>>(newExpression, express.Parameters[0]);
-  //}
-
-  //protected void Or(Expression<Func<T, object>> express)
-  //{
-  //  var newExpression = Expression.Or(Criteria.Body, express.Body);
-  //  Criteria = Expression.Lambda<Func<T, bool>>(newExpression);
-  //}
-
   protected void AddInclude(Expression<Func<T, object>> include) => Includes.Add(include);
 
   protected void AddOrderBy(Expression<Func<T, object>> orderBy) => OrderBy = orderBy;
 
   protected void AddOrderByDescending(Expression<Func<T, object>> orderByDescending) => OrderByDescending = orderByDescending;
-}
-
-public class AndSpecification<T> : Specification<T>, ISpecification<T>
-{
 }
