@@ -14,10 +14,14 @@ public class Repository<TEntity>
     _context = context;
   }
 
-  public Task<IEnumerable<TEntity>> FindWithSpecification(ISpecification<TEntity> specification)
+  public async Task<IEnumerable<TEntity>> GetWithSpecification(ISpecification<TEntity> specification)
   {
-    var result = SpecificationEvaluator.GetQuery(_context.Set<TEntity>(), specification);
-    return Task.FromResult(result);
+    return await SpecificationEvaluator.GetQuery(_context.Set<TEntity>(), specification);
+  }
+
+  public async Task<TEntity> FindWithSpecification(ISpecification<TEntity> specification)
+  {
+    return await SpecificationEvaluator.Find(_context.Set<TEntity>(), specification);
   }
 
   public virtual Task<TEntity?> Get(long id)
