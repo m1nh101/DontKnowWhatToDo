@@ -14,8 +14,8 @@ public static class SpecificationEvaluator
     if(specification.Criteria is not null)
       result = result.Where(specification.Criteria);
 
-    _ = specification.Includes.Aggregate(result, (current, expression) =>
-      current.Include(expression));
+    result = specification.Includes.Aggregate(result, (current, expression) =>
+      expression(current));
 
     if (specification.OrderBy is not null)
       result = result.OrderBy(specification.OrderBy);

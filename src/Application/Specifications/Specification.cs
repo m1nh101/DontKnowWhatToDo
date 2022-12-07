@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Application.Abstractions;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Application.Specifications;
 
@@ -18,13 +19,13 @@ public class Specification<T> : ISpecification<T>
 
   public Expression<Func<T, bool>> Criteria { get; private set; } = default!;
 
-  public List<Expression<Func<T, object>>> Includes { get; }
-
   public Expression<Func<T, object>>? OrderBy { get; private set; }
 
   public Expression<Func<T, object>>? OrderByDescending { get; private set; }
 
-  protected void AddInclude(Expression<Func<T, object>> include) => Includes.Add(include);
+  public List<Func<IQueryable<T>, IIncludableQueryable<T, object>>> Includes { get; }
+
+  protected void AddInclude(Func<IQueryable<T>, IIncludableQueryable<T, object>> include) => Includes.Add(include);
 
   protected void AddOrderBy(Expression<Func<T, object>> orderBy) => OrderBy = orderBy;
 
