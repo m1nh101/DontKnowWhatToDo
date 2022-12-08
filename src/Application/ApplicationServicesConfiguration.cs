@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Application.Behaviors;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ public static class ApplicationServicesConfiguration
 
     services.AddMediatR(currentAssembly);
     services.AddValidatorsFromAssembly(currentAssembly);
+
+    services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateBehavior<,>));
 
     return services;
   }
