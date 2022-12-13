@@ -7,7 +7,7 @@ namespace Application.Specifications;
 
 public static class SpecificationEvaluator
 {
-  public static Task<IEnumerable<TEntity>> GetQuery<TEntity>(IQueryable<TEntity> sources,
+  public static IQueryable<TEntity> Get<TEntity>(IQueryable<TEntity> sources,
     ISpecification<TEntity> specification, Query state = Query.NoTracking)
     where TEntity : class
   {
@@ -25,7 +25,7 @@ public static class SpecificationEvaluator
     if (specification.OrderByDescending is not null)
       result = result.OrderByDescending(specification.OrderByDescending);
 
-    return Task.FromResult(result.AsEnumerable());
+    return result;
   }
 
   public static async Task<TEntity> Find<TEntity>(IQueryable<TEntity> sources, ISpecification<TEntity> specification)
