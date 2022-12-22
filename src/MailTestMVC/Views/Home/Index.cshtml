@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model MailForm
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<form method="post"
+    asp-controller="Home"
+    asp-action="SendMail"
+    enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>CC</label>
+        <input class="form-control" placeholder="" asp-for="CC" />
+    </div>
+    <div class="mb-3">
+        <label>Subject</label>
+        <input class="form-control" placeholder="" asp-for="Subject" />
+    </div>
+    <div class="mb-3">
+        <label>Body</label>
+        <textarea class="form-control" rows="8" asp-for="Body" ></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Attachment</label>
+        <input class="form-control" type="file" multiple placeholder="" asp-for="Attachments" />
+    </div>
+    <input type="submit" value="Send" class="btn btn-primary"/>
+</form>

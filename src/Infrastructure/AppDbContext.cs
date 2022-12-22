@@ -22,4 +22,11 @@ public class AppDbContext : DbContext
 
 		base.OnModelCreating(modelBuilder);
 	}
+
+  public override int SaveChanges()
+  {
+
+
+    return base.SaveChanges();
+  }
 }
